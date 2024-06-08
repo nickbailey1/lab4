@@ -1,16 +1,42 @@
 # Hey! I'm Filing Here
 
-In this lab, I successfully implemented the following TODO
+In this lab, I successfully implemented an ext2 file system image which contains a root directory with one directory, one regular file, and one symbolic link inside of it.
 
 ## Building
 
-TODO
+Run the following command to build the executable
+```shell
+make
+```
+Then run the following command to create the filesystem image
+```shell
+./ext2-create
+```
 
 ## Running
 
-TODO
+Can view filesystem contents and check image validity with the following commands:
+```shell
+dumpe2fs cs111-base.img
+fsck.ext2 cs111-base.img
+```
+
+To mount and view the filesystem, run
+```shell
+mkdir mnt
+sudo mount -o loop cs111-base.img mnt
+```
+(now you can navigate the filesystem image)
+
+```shell
+sudo unmount mnt
+rmdir mnt
+```
+unmount
 
 
 ## Cleaning up
 
-TODO
+```shell
+make clean
+```
