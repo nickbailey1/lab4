@@ -77,6 +77,34 @@ typedef int32_t i32;
 
 #define EXT2_NAME_LEN 255
 
+/*MACROS*/
+
+// s_mnt_count
+#define MNT_COUNT_UNLIMITED -1 // unlimited
+#define MNT_COUNT_LIMIT 5 // can limit
+
+// s_state
+#define EXT2_STATE_CLEAN 1
+
+// s_errors
+#define EXT2_ERRORS_IGNORE 1
+
+// s_checkinterval
+#define CHECK_INTERVAL 1 // seconds
+
+// s_creator_os
+#define EXT2_CREATOR_OS_LINUX 0
+
+// s_def_resuid
+#define EXT2_DEF_RESUID 0
+
+// s_def_resgid
+#define EXT2_DEF_RESGID 0
+
+// block_group_descriptor
+#define DIRS_COUNT 2 // directories
+
+
 struct ext2_superblock {
 	u32 s_inodes_count;
 	u32 s_blocks_count;
