@@ -311,9 +311,9 @@ void write_block_bitmap(int fd)
 	}
 
 	// TODO It's all yours
-	u8 map_value[BLOCK_SIZE];
+	u8 map_value[BLOCK_SIZE] = {0};
 
-	// 23 blocks are used for setup, so need to mark those
+	// 23 blocks are used for setup, so need to mark as allocated in bitmap
 	map_value[0] = 0xFF; // 1111 1111
 	map_value[1] = 0xFF; // 1111 1111
 	map_value[2] = 0x7F; // 0111 1111
@@ -338,7 +338,7 @@ void write_inode_bitmap(int fd)
 	}
 
 	// TODO It's all yours
-	u8 map_value[BLOCK_SIZE];
+	u8 map_value[BLOCK_SIZE] = {0};
 
 	// 13 inodes in use
 	map_value[0] = 0xFF; // 1111 1111
@@ -461,9 +461,9 @@ void write_inode_table(int fd) {
 void write_root_dir_block(int fd)
 {
 	// TODO It's all yours
-	off_t offset = BLOCK_OFFSET(ROOT_DIR_BLOCKNO);
-	offset = lseek(fd, offset, SEEK_SET);
-	if (offset == -1) {
+	off_t off = BLOCK_OFFSET(ROOT_DIR_BLOCKNO);
+	off = lseek(fd, off, SEEK_SET);
+	if (off == -1) {
 		errno_exit("lseek");
 	}
 
@@ -528,14 +528,14 @@ void write_lost_and_found_dir_block(int fd) {
 void write_hello_world_file_block(int fd)
 {
 	// TODO It's all yours
-	off_t offset = BLOCK_OFFSET(HELLO_WORLD_FILE_BLOCKNO);
-	offset = lseek(fd, offset, SEEK_SET);
-	if (offset == -1) {
+	off_t off = BLOCK_OFFSET(HELLO_WORLD_FILE_BLOCKNO);
+	off = lseek(fd, off, SEEK_SET);
+	if (off == -1) {
 		errno_exit("lseek");
 	}
 	char text[] = "Hello world\n";
-	ssize_t numbytes = sizeof(text);
-	if (write(fd, text, numbytes) != numbytes) {
+	ssize_t size = sizeof(text);
+	if (write(fd, text, size) != size) {
 		errno_exit("write");
 	}
 }
